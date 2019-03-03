@@ -271,8 +271,75 @@
 
 #### tr
 
-- tr命令：对标准输入的字符替换,压缩，删除
-  - c
+- **tr命令**：对标准输入的字符替换,压缩，删除
+  - c ：取代所有不属于第一字符集的字符
+  - d ：删除所有属于第一字符集的字符
+  - s ：将连续重复的字符以单独一个字符表示
+  - t ：先删除第一字符集较第二字符集多出的字符
+
+#### cut
+- **cut命令**：切分
+  - -d  c：以c字符分割
+  - -f num：显示num字段的内容 （n-; n - m; -m）
+  - -b num：字节
+  - -c num：字符
+
+#### grep
+- **grep命令**：检索
+  - -a：将二进制文件以普通文件的形式搜寻数据
+  - -c：统计搜寻到的次数（count）
+  - -i：忽略大小写
+  - -n：顺序输出行号
+  - -v：反向输出（输出没有找到的）
+
+#### sort
+- **sort命令**：排序
+  - -f：忽略大小写
+  - -b：忽略最前面的空格符
+  - -M：以月份名称排序
+  - -n：以纯数字方式排序
+  - -r：反向排序
+  - -u：uniq
+  - -t：分隔符，默认tab
+  - -k：以那个区间排序
+
+#### wc
+- **wc命令**：统计字符，字数，行数
+  - -l：仅列出行号
+  - -w：仅列出多少字
+  - -m | -c：仅列出多少字符
+
+#### uniq
+
+- **uniq命令**：去重
+  - -i：忽略大小写字符的不同
+  - -c：进行计数
+
+#### tee
+- **tee命令**：双向重导项
+  - tee [-a] file
+  - -a：append (就是既把他输出到屏幕上又存放进文件里)
+
+#### split
+- **split命令**：文件切分
+  - -b SIZE：切分为SIZE大小的文件
+  - -l num：以num行为大小切分
+
+#### xargs
+- **xargs命令**：参数代换
+  - -0：将特殊字符还原成普通字符
+  - -eEOF：当xargs 读到EOF时停止
+  - -p：执行指令前询问
+  - -n num：每次执行command时需要的参数个数
+
+#### su
+
+- su命令：切换用户
+  - ` -` | -l ：重新登录
+
+
+
+
 
 
 
@@ -283,7 +350,9 @@
 ### BASIC
 
 - 树莓派ID：192.168.1.40 ---  192.168.1.49
+
 - 终端(terminal) 其实就是一个子进程，在退出这个进程的时候对终端做的修改就全部失效了，除非把这些更改都改到文件中
+
 - 查阅命令：
   - man  命令
   - tldr 命令    (too long dont read)
@@ -297,25 +366,39 @@
   - git log：查看上传版本
   - git reset --hard (commit 值)  ：回溯上传版本
   - github 进去没有图像 ，  更改地址：/etc/hosts    
+
 - `#!` ：  需要哪个解释器执行
+
 - Linux 主要应用：大型机，小型机，中低端服务器，智能家居和几乎所有的嵌入式设备都是基于Linux的
 
 - shell是一种人机交互的接口，是指“提供使用者使用的页面” 的软件，是一种命令解释器
+
 - chmod   a (所有人）+ x（可执行权限）：(change mod) 改变权限
+
 - [a-zA-Z]：索引所有大写 A-Z和小写 a-z
+
 - which   (命令)      查找命令所在位置
   - type   （命令）    命令类型
+
 - $PATH ：路径
+
 - kill -9  (进程号)  (查进程号：ps -ef | grep a.out)   （-9强制杀死）
+
 - <<   （ 内容）     标明什么时候结束    
+
 - fstab     文件系统静态信息
+
 - cat >>a.out << EE
   - EE 代表输入的文本段以什么结束
   - 作用：将输入的文本重定向到文件
+
 - 管道 `|`：先进先出，出去就没有了
+
 - history：查看历史记录
   - 执行某一条历史记录：`!(历史记录的某一条)` 
+
 - ctrl + r：检索历史记录
+
 - 目录结构：
   - /usr : 用户级别相关软件
   - /boot : 系统的引导程序
@@ -327,10 +410,14 @@
   - /mnt : 专门用来挂载设备（可有可无）
   - /bin : 可执行
   - /var : 动态数据
+
 - 三种启动服务方式：只说了一个systemd，别的不常用了
+
 - /etc/fstab : 可以增加挂载
+
 - env : 环境变量
   - OLDPWD存储的是上一次访问的路径，所以用cd - 可以回到上一次访问的路径
+
 - bashrc 文件
   - bashrc 全局用户  (etc/bashrc) (/home/xinyue/.bashrc)
   - proflie用户登录  (etc/ bashrc)  (/home/xinyue/.profile)
@@ -338,19 +425,38 @@
   - 执行文件
     - sourse  bash.bashrc
     - . bash.bashrc 
+
 - c ：字符设备
+
 - 作为一个管理员，如何给其他用户发信息
   - echo "Hello" >> /dev/pts/1
   - echo "hello" > /dev/pts1
   - write  xinyue   pts/1
   - wall "Hello"    广播信息（给所有人）
+
 - 修改文件时间与新建文件：
   - mtime ：内容数据改动时更新这个时间
   - ctime：文件权限属性改动时更新这个时间
   - atime：文件被读被打开的时候更新这个时间
-- 
 
+- ls不接受标准输入，需要参数代换
+  - echo "b" | xargs ls -al
 
+- d｜rwx|rwx|rwx 
+
+  - 第一个d 表示是一个目录， 后面的三段分别表示： 
+
+    ```
+    第一段 是指 owner 属主的读、写、执行权限 
+    第二段 是指 group 的读、写、执行权限； 
+    第三段 是指 other 的读、写、执行权限
+    ```
+
+- chown root:usergroup  /(path)
+  chmod    770(想要赋予的权限)    /(path)
+  chmod   +t(文件的特殊权限)     /(path)
+
+- `chsh -s Shell <username>` ：更改用户shell
 
 
 
@@ -367,6 +473,12 @@
 [命令系统](https://www.haizeix.com/course/208/task/9556/show)
 
 [基本系统](https://www.haizeix.com/course/208/task/9557/show)
+
+[用户管理](https://www.haizeix.com/course/208/task/9882/show)
+
+
+
+--------
 
 
 
@@ -420,6 +532,10 @@ done
 
 
 
+--------
+
+
+
 ### 小脚本和问题
 
 - 查找文件中字符串最长的文件名
@@ -444,21 +560,7 @@ done
 
 
 
-d｜rwx|rwx|rwx 
 
-第一个d 表示是一个目录， 后面的三段分别表示： 
-
-	第一段 是指 owner 属主的读、写、执行权限 
-	
-	第二段是指 group 的读、写、执行权限； 
-	
-	第三段是指 other 的读、写、执行权限
-
-chown root:usergroup  /(path)
-
-chmod    770(想要赋予的权限)    /(path)
-
-chmod   +t(文件的特殊权限)     /(path)
 
 
 
