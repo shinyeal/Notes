@@ -332,10 +332,64 @@
   - -p：执行指令前询问
   - -n num：每次执行command时需要的参数个数
 
+--------
+
 #### su
 
 - su命令：切换用户
   - ` -` | -l ：重新登录
+
+#### sudo
+
+- sudo命令：临时切换到root
+  - -s：切换到root shell
+  - -i：切换到root shell，并初始化
+  - -u username | uid ：用其他身份执行命令权限
+  - -l：显示自己的权限
+
+#### passwd
+
+- passwd <username> :设定用户密码
+  - -d：清除密码
+  - -l：锁定账号
+  - -e：使密码过期
+  - -S：显示密码认证信息
+  - -x days：密码修改过后最大使用天数
+  - -n days：密码修改间隔时间
+  - -s：更改登录shell
+  - -f：更改用户信息（用户昵称）
+  - -i：密码过期后宽限时间
+
+#### gpasswd
+
+- gpasswd：设置群组及群组密码
+  - -a(add) username：将用户加入群组
+  - -d(delete) username：将用户从群组中删除
+  - -r：删除密码
+  - -A(admin)：将用户设置成群组管理员
+  - -M(member)：设置群组成员
+
+#### useradd
+
+- useradd：添加用户
+  - -d dir：指定$HOME
+  - -m：自动建立$HOME
+  - -M：不自动建立$HOME
+  - -s shell：设置用户登录shell
+  - -u uid：设置用户编号
+  - -g groupname：设定用户归属群组
+  - -G groupname：设置用户归属附加群组
+
+#### userdel
+
+- userdel：删除用户
+  - -r：删除用户相关文件和目录（邮件，家目录）
+
+
+
+
+
+
 
 
 
@@ -458,6 +512,8 @@
 
 - `chsh -s Shell <username>` ：更改用户shell
 
+- 去掉空行  ： tr -s '\n'
+
 
 
 
@@ -568,18 +624,13 @@ done
 
 1. updatedb
 
-2. 
-
-3. find / -name "\*" -mtime +365 -perm 666 2>/dev/null -exec cp {} ~ \;
+2. find / -name "\*" -mtime +365 -perm 666 2>/dev/null -exec cp {} ~ \;
 
    ​	ls -al `\*`
 
    ​        rm `\*`
 
-4. ls不接受标准输入          用xargs
-
-5. 去掉空行  ：     tr -s '\n'
-
+   
 
 
 df -h   
